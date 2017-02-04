@@ -4,7 +4,7 @@
 enum  e_mode 
 {
       MODE_NORMAL = 1,
-      MODE_GAMING = 2, // NEED FIX
+      MODE_GAMING = 2,
       MODE_BREATH = 3,
       MODE_AUDIO  = 4, // NEED FIX
       MODE_WAVE   = 5, // Wave may need a fix

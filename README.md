@@ -24,5 +24,8 @@ If you want to run the software as a non-root user, you can add the udev rules f
 ## Notes
 The audio mode does not work on linux at the moment.
 
+## Issues
+Delay on the wave is wrong, this may comme from the delay.
+
 ## Unknown packet
 `01 02 22 14 00 00 00 00`: Usually sent when switching to audio mode
