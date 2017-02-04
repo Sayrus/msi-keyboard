@@ -8,6 +8,7 @@ enum  e_mode
       MODE_BREATH = 3,
       MODE_AUDIO  = 4, // NEED FIX
       MODE_WAVE   = 5, // Wave may need a fix
+      MODE_DUAL   = 6
 };
 e_mode ConvertToEMode(char* mode);
 enum  e_region

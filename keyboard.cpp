@@ -18,6 +18,8 @@ e_mode ConvertToEMode(char* mode)
     return e_mode::MODE_AUDIO;
   if(strcmp(mode, "wave") == 0)
     return e_mode::MODE_WAVE;
+  if(strcmp(mode, "dual") == 0)
+    return e_mode::MODE_DUAL;
   return e_mode::MODE_NORMAL;
 }
 e_region ConvertToERegion(char* region)
