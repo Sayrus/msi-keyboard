@@ -14,6 +14,10 @@ e_mode ConvertToEMode(char* mode)
     return e_mode::MODE_GAMING;
   if(strcmp(mode, "breath") == 0)
     return e_mode::MODE_BREATH;
+  if(strcmp(mode, "demo") == 0)
+    return e_mode::MODE_DEMO;
+  if(strcmp(mode, "wave") == 0)
+    return e_mode::MODE_WAVE;
   return e_mode::MODE_NORMAL;
 }
 e_region ConvertToERegion(char* region)
@@ -107,9 +111,9 @@ void Keyboard::setColors(e_color primaryColor, e_intensity primaryIntensity, e_c
     hid_send_feature_report(handle, buffer, BUFFER_SIZE);
     buffer[3] = i + 2;
     // I will keep buffer[4-6] = 2 until I figure out what changing one of them does to the keyboard
-    buffer[4] = 2;
-    buffer[5] = 2;
-    buffer[6] = 2;
+    buffer[4] = 3;
+    buffer[5] = 0;
+    buffer[6] = 0;
     hid_send_feature_report(handle, buffer, BUFFER_SIZE);
   } 
 }

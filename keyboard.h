@@ -4,8 +4,10 @@
 enum  e_mode 
 {
       MODE_NORMAL = 1,
-      MODE_GAMING = 2,
-      MODE_BREATH = 3
+      MODE_GAMING = 2, // NEED FIX
+      MODE_BREATH = 3,
+      MODE_DEMO   = 4, // UNKNOWN
+      MODE_WAVE   = 5
 };
 e_mode ConvertToEMode(char* mode);
 enum  e_region

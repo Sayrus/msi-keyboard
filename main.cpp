@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
   char*       intensity     = getCmdOption(argv, argv + argc, "-i");
   char*       color2        = getCmdOption(argv, argv + argc, "-c2");
   char*       intensity2    = getCmdOption(argv, argv + argc, "-i2");
-  
+
   e_mode      newMode       = ConvertToEMode(mode);
   e_color     newColor      = ConvertToEColor(color);
   e_color     newColor2     = ConvertToEColor(color2);
