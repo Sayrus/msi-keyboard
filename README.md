@@ -1,5 +1,5 @@
 # msi-keyboard
-Allow the user to change the keyboard backlight using hidapi
+Allows the user to change the keyboard backlight using hidapi
 
 This project is based on bparker06's work but aim to fix the animated modes.
 
@@ -39,5 +39,5 @@ The audio mode does not work on linux at the moment.
 ## Issues
 Delay on the wave is wrong, this may comme from the delay.
 
-## Unknown packet
+## Unknown packets
 `01 02 22 14 00 00 00 00`: Usually sent when switching to audio mode
