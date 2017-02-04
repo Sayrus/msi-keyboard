@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
   e_color     newColor2     = ConvertToEColor(color2);
   e_intensity newIntensity  = ConvertToEIntensity(intensity); 
   e_intensity newIntensity2 = ConvertToEIntensity(intensity2); 
-  if(!full && !color2) 
+  if(!full) 
   {
     char*     region        = getCmdOption(argv, argv + argc, "-r");
     e_region  newRegion     = ConvertToERegion(region);

@@ -85,34 +85,6 @@ void Keyboard::debug(unsigned char buffer[])
     return;
   hid_send_feature_report(handle, buffer, BUFFER_SIZE);
 }
-void Keyboard::setColors(e_color primaryColor, e_intensity primaryIntensity, e_color secondaryColor, e_intensity secondaryIntensity)
-{
-  if(!handle)
-    return;
-  unsigned char buffer[BUFFER_SIZE] = {0};
-  buffer[0] = 1;
-  buffer[1] = 2;
-  buffer[2] = 67;
-  buffer[7] = 236;
-  for(int i = 1; i < 9; i += 3)
-  {
-    buffer[3] = i;
-    buffer[4] = static_cast<unsigned int>(primaryColor);
-    buffer[5] = static_cast<unsigned int>(primaryIntensity);
-    buffer[6] = 0;
-    hid_send_feature_report(handle, buffer, BUFFER_SIZE);
-    buffer[3] = i + 1;
-    buffer[4] = static_cast<unsigned int>(secondaryColor);
-    buffer[5] = static_cast<unsigned int>(secondaryIntensity);
-    hid_send_feature_report(handle, buffer, BUFFER_SIZE);
-    buffer[3] = i + 2;
-    // I will keep buffer[4-6] = 2 until I figure out what changing one of them does to the keyboard
-    buffer[4] = 2;
-    buffer[5] = 2;
-    buffer[6] = 2;
-    hid_send_feature_report(handle, buffer, BUFFER_SIZE);
-  } 
-}
 void Keyboard::setMode(e_mode mode)
 {
   if(!handle)
