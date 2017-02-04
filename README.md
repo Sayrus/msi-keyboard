@@ -15,3 +15,6 @@ msi-keyboard [-m normal] [-r (left|middle|right)] [-c (none|red|orange|yellow|gr
 * `-c`: backlight's new color
 * `-i`: backlight's intensity
 * `--full`: apply the change on the whole keyboard. `-r` will be ignored
+
+## Run as non-root user
+If you want to run the software as a non-root user, you can add the udev rules file to your `/etc/udev/rules.d/` directory.
