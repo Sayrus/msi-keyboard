@@ -8,12 +8,14 @@ This project is based on bparker06's work but aim to fix the animated modes.
 
 ## Usage
 ```
-msi-keyboard [-m normal] [-r (left|middle|right)] [-c (none|red|orange|yellow|green|sky|blue|purple|white)] [-i (high|medium|low|light)] [--full]
+msi-keyboard [-m normal|gaming|breath|audio|wave] [-r (left|middle|right)] [-c (none|red|orange|yellow|green|sky|blue|purple|white)] [-i (high|medium|low|light)] [-c2 (none|red|orange|yellow|green|sky|blue|purple|white)] [-i2 (high|medium|low|light)] [--full]
 ```
 * `-m`: keyboard mode
 * `-r`: keyboard region on which the color is going to be applied (see also --full)
 * `-c`: backlight's new color
 * `-i`: backlight's intensity
+* `-c2`: backlight's secondary color for breath and wave mode
+* `-i2`: backlight's secondary intensity for breath and wave mode
 * `--full`: apply the change on the whole keyboard. `-r` will be ignored
 
 ## Run as non-root user
