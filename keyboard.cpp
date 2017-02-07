@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "hidapi.h"
 #include "keyboard.h"
 #define BUFFER_SIZE 8
@@ -172,3 +173,48 @@ void Keyboard::setColor(e_region region, s_color rgb)
   hid_send_feature_report(handle, buffer, BUFFER_SIZE);
 }
 
+void Keyboard::setDualColor(s_pairColor primary, s_pairColor secondary, e_region region, double period)
+{
+  int index = static_cast<int>(region) * 3 - 2;
+  int data1 = Keyboard::ComputeRampSpeed(
+      Keyboard::colorPalette[static_cast<int>(primary.color)][static_cast<int>(primary.intensity)][1],
+      Keyboard::colorPalette[static_cast<int>(secondary.color)][static_cast<int>(secondary.intensity)][1],
+      period
+    );
+  int data2 = Keyboard::ComputeRampSpeed(
+      Keyboard::colorPalette[static_cast<int>(primary.color)][static_cast<int>(primary.intensity)][2],
+      Keyboard::colorPalette[static_cast<int>(secondary.color)][static_cast<int>(secondary.intensity)][2],
+      period
+    );
+  int data3 = Keyboard::ComputeRampSpeed(
+      Keyboard::colorPalette[static_cast<int>(primary.color)][static_cast<int>(primary.intensity)][3],
+      Keyboard::colorPalette[static_cast<int>(secondary.color)][static_cast<int>(secondary.intensity)][3],
+      period
+    );
+  unsigned char buffer[BUFFER_SIZE] = {0};
+  buffer[0] = 1;
+  buffer[1] = 2;
+  buffer[2] = 67;
+  buffer[3] = index;
+  buffer[4] = static_cast<int>(primary.color);
+  buffer[5] = static_cast<int>(primary.intensity);
+  buffer[6] = 0;
+  buffer[7] = 236;
+  hid_send_feature_report(handle, buffer, BUFFER_SIZE);
+  buffer[3]++;
+  buffer[4] = static_cast<int>(secondary.color);
+  buffer[5] = static_cast<int>(secondary.intensity);
+  hid_send_feature_report(handle, buffer, BUFFER_SIZE);
+  buffer[3]++;
+  buffer[4] = data1;
+  buffer[5] = data2;
+  buffer[6] = data3;
+  hid_send_feature_report(handle, buffer, BUFFER_SIZE);
+}
+
+int Keyboard::ComputeRampSpeed(double comp1, double comp2, double period)
+{
+  if(comp1 == comp2)
+    return 0;
+  return static_cast<int>(ceil(250.0 / (abs(comp1 - comp2) / period)));
+}

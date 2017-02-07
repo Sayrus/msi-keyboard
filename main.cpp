@@ -40,12 +40,18 @@ int main(int argc, char* argv[])
   char*       intensity     = getCmdOption(argv, argv + argc, "-i");
   char*       color2        = getCmdOption(argv, argv + argc, "-c2");
   char*       intensity2    = getCmdOption(argv, argv + argc, "-i2");
-
   e_mode      newMode       = ConvertToEMode(mode);
   e_color     newColor      = ConvertToEColor(color);
   e_color     newColor2     = ConvertToEColor(color2);
   e_intensity newIntensity  = ConvertToEIntensity(intensity); 
-  e_intensity newIntensity2 = ConvertToEIntensity(intensity2); 
+  e_intensity newIntensity2 = ConvertToEIntensity(intensity2);
+  s_pairColor primary = { newColor, newIntensity };
+  s_pairColor secondary = { newColor2, newIntensity2 };
+  keyboard.setDualColor(primary, secondary, e_region::REGION_LEFT, 2.0);
+  keyboard.setDualColor(primary, secondary, e_region::REGION_MIDDLE, 2.0);
+  keyboard.setDualColor(primary, secondary, e_region::REGION_RIGHT, 2.0);
+  keyboard.setMode(e_mode::MODE_WAVE);
+  return 0; 
   if(!full && !color2) 
   {
     char*     region        = getCmdOption(argv, argv + argc, "-r");

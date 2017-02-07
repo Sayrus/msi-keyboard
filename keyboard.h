@@ -45,18 +45,26 @@ struct  s_color
   char  green;
   char  blue;
 };
+struct        s_pairColor
+{
+  e_color     color;
+  e_intensity intensity;
+};
 class Keyboard
 {
   public:
     Keyboard();
     ~Keyboard();
-    void debug(unsigned char buffer[]);
-    void setColors(e_color primaryColor, e_intensity primaryIntensity, e_color secondaryColor, e_intensity secondaryIntensity);
-    void setMode(e_mode mode);
-    void setMode(char* mode);
-    void setColor(e_region region, e_color color, e_intensity intensity);
-    void setColor(e_region region, s_color rgb);
+    void  debug(unsigned char buffer[]);
+    void  setColors(e_color primaryColor, e_intensity primaryIntensity, e_color secondaryColor, e_intensity secondaryIntensity);
+    void  setMode(e_mode mode);
+    void  setMode(char* mode);
+    void  setColor(e_region region, e_color color, e_intensity intensity);
+    void  setColor(e_region region, s_color rgb);
+    void  setDualColor(s_pairColor primary, s_pairColor secondary, e_region region, double period);
+    int   ComputeRampSpeed(double comp1, double comp2, double period);
   private:
     hid_device *handle;
+    int colorPalette[9][4][4]={{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},{{0,170,0,0},{0,255,0,0},{0,255,32,16},{0,238,80,48}},{{0,170,64,0},{0,187,112,0},{0,204,170,16},{0,238,204,48}},{{0,128,128,0},{0,238,238,0},{0,255,255,32},{0,238,238,48}},{{0,16,255,0},{0,176,255,0},{0,32,221,32},{0,170,238,48}},{{0,0,170,255},{0,0,255,255},{0,80,255,238},{0,144,238,255}},{{0,0,0,170},{0,0,0,255},{0,0,255,255},{0,80,204,238}},{{0,21,0,160},{0,48,0,255},{0,187,170,255},{0,255,255,255}},{{0,176,255,176},{0,176,255,176},{0,176,255,176},{0,176,255,176}}};
 };
 #endif
