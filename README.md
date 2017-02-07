@@ -38,6 +38,7 @@ The audio mode does not work on linux at the moment.
 
 ## Issues
 Fixed: Delay on the wave is wrong, this may comme from the delay.
+
 Fixed: Wrong secondary color on wave mode
 
 ## Unknown packets
