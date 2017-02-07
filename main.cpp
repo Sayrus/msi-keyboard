@@ -45,28 +45,43 @@ int main(int argc, char* argv[])
   e_color     newColor2     = ConvertToEColor(color2);
   e_intensity newIntensity  = ConvertToEIntensity(intensity); 
   e_intensity newIntensity2 = ConvertToEIntensity(intensity2);
-  s_pairColor primary = { newColor, newIntensity };
-  s_pairColor secondary = { newColor2, newIntensity2 };
-  keyboard.setDualColor(primary, secondary, e_region::REGION_LEFT, 2.0);
-  keyboard.setDualColor(primary, secondary, e_region::REGION_MIDDLE, 2.0);
-  keyboard.setDualColor(primary, secondary, e_region::REGION_RIGHT, 2.0);
-  keyboard.setMode(e_mode::MODE_WAVE);
-  return 0; 
-  if(!full && !color2) 
+  double period = 0;
+  switch(newMode)
   {
-    char*     region        = getCmdOption(argv, argv + argc, "-r");
-    e_region  newRegion     = ConvertToERegion(region);
-    keyboard.setColor(newRegion, newColor, newIntensity);
-  }
-  else if(!color2)
-  {
-    keyboard.setColor(e_region::REGION_LEFT, newColor, newIntensity);
-    keyboard.setColor(e_region::REGION_MIDDLE, newColor, newIntensity);
-    keyboard.setColor(e_region::REGION_RIGHT, newColor, newIntensity);
-  }
-  else
-  {
-    keyboard.setColors(newColor, newIntensity, newColor2, newIntensity2);
+    case e_mode::MODE_DUAL:
+      period = 2.0;
+    case e_mode::MODE_WAVE:
+      if(period == 0)
+        period = 1.5;
+    case e_mode::MODE_BREATH:
+      if(period == 0)
+        period = 1.0;
+      {
+        s_pairColor primary = { newColor, newIntensity };
+        s_pairColor secondary = { newColor2, newIntensity2 };
+        keyboard.setDualColor(primary, secondary, e_region::REGION_LEFT, period);
+        keyboard.setDualColor(primary, secondary, e_region::REGION_MIDDLE, period);
+        keyboard.setDualColor(primary, secondary, e_region::REGION_RIGHT, period);
+      }
+      break;
+    case e_mode::MODE_GAMING:
+      keyboard.setColor(e_region::REGION_LEFT, newColor, newIntensity);
+      break;
+    case e_mode::MODE_NORMAL:
+    default:
+      if(full)
+      {
+        keyboard.setColor(e_region::REGION_LEFT, newColor, newIntensity);
+        keyboard.setColor(e_region::REGION_MIDDLE, newColor, newIntensity);
+        keyboard.setColor(e_region::REGION_RIGHT, newColor, newIntensity);
+      }
+      else
+      {
+        char*     region        = getCmdOption(argv, argv + argc, "-r");
+        e_region  newRegion     = ConvertToERegion(region);
+        keyboard.setColor(newRegion, newColor, newIntensity);
+      }
+      break;
   }
   keyboard.setMode(newMode);
 #ifdef WIN32
