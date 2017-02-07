@@ -1,7 +1,7 @@
 # msi-keyboard
 Allow the user to change the keyboard backlight using hidapi
 
-This project is based on bparker06's work but aim to fix the animated modes.
+This project is based on bparker06's work but aim to fix the animated modes. Moreover, the keyboard is able to do more than what MSI KLM allows you to do which is why the project will allow you to fully control your keyboard's backlight.
 
 ## Require
 * hidapi.h available on Arch AUR or on [Github](https://github.com/signal11/hidapi)
@@ -37,7 +37,8 @@ If you want to run the software as a non-root user, you can add the udev rules f
 The audio mode does not work on linux at the moment.
 
 ## Issues
-Delay on the wave is wrong, this may comme from the delay.
+Fixed: Delay on the wave is wrong, this may comme from the delay.
+Fixed: Wrong secondary color on wave mode
 
 ## Unknown packet
 `01 02 22 14 00 00 00 00`: Usually sent when switching to audio mode
